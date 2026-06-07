@@ -1,0 +1,150 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  padding-right: 0 !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+html.dark .special-label {
+  background-color: #1f2937; 
+  color: white;
+}
+html.dark .country-list .search input {
+  background-color: #1f2937 !important; 
+  color: white !important;              
+  border: 1px solid #4b5563 !important; 
+}
+
+html.dark .country-list .search input::placeholder {
+  color: #9ca3af !important; 
+}
+
+html.dark .country-list {
+  background-color: #1f2937 !important;
+  color: white !important;
+}
+
+html.dark .country-list .country {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+html.dark .country-list .country:hover {
+  background-color: #374151 !important;
+}
+
+html.dark .country-list .flag {
+  filter: brightness(0.9);
+}
+
+header {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+nav > header {
+  max-width: 100%;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+
+}
+body {
+  width: 100vw;
+  padding-right: 0px !important;
+}
+.modal-backdrop {
+  width: calc(100% - 6px) !important;
+}
+
+.react-tel-input .form-control:focus {
+  border-color: hsl(var(--nextui-primary)) !important;
+  box-shadow: 0 0 0 1px hsl(var(--nextui-colors-primary)) !important;
+  outline: none;
+}
+
+.react-tel-input .selected-flag:focus {
+  border-color: hsl(var(--nextui-colors-primary)) !important;
+}
+.full-width {
+  min-width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: #f97316 !important;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #f97316 !important;
+}
+
+.offers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: flex-start;
+}
+
+.offers-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  width: 260px;
+  height: 260px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+}
+
+.offers-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.offers-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,#eee 25%,#ddd 50%,#eee 75%);
+  border-radius: 16px;
+  animation: offers-skeleton-loading 1.2s infinite linear;
+}
+
+@keyframes offers-skeleton-loading {
+  0% { background-position: -260px 0; }
+  100% { background-position: 260px 0; }
+}

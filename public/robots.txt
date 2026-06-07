@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block user-specific pages from indexing
+Disallow: /user/cart
+Disallow: /user/address
+Disallow: /user/wallet
+Disallow: /user/my-orders
+Disallow: /user/favorites
+Disallow: /user/profile
+Disallow: /user/refer
+
+Sitemap: https://www.urkitchenegypt.com/sitemap.xml
