@@ -17,6 +17,8 @@ const Footer = () => {
     (state) => state?.settings?.value?.web_settings?.[0]
   );
 
+  const phoneNumber = settings?.support_number || siteConfig.contact.phone;
+
   const socialLinks = [
     settings?.facebook_link && {
       href: settings.facebook_link,
@@ -118,11 +120,11 @@ const Footer = () => {
                   </a>
                 </li>
               )}
-              {settings?.support_number && (
+              {phoneNumber && (
                 <li className="flex items-center gap-2">
                   <RiPhoneLine size={16} className="flex-shrink-0 text-accent" />
-                  <a href={`tel:${settings.support_number}`} className="hover:text-white transition">
-                    {settings.support_number}
+                  <a href={`tel:${phoneNumber}`} className="hover:text-white transition">
+                    {phoneNumber}
                   </a>
                 </li>
               )}

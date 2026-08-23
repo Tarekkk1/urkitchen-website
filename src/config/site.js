@@ -53,6 +53,9 @@ export const siteConfig = {
       href: "/logout",
     },
   ],
+  contact: {
+    phone: "01010984579",
+  },
   links: {
     playStore:
       "https://play.google.com/store/apps/details?id=com.eatsegypt.urkitchen&hl=en",
