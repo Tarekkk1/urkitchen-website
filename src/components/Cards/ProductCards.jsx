@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Card, CardBody, Chip } from "@heroui/react";
+import { Button } from "@heroui/button";
 import { RiStarFill, RiHeartFill, RiHeartLine } from "@remixicon/react";
-import ProductModal from "../../components/Modals/ProductModal";
 import ProductRatingModal from "../../components/Modals/ProductRatingModal";
 import { toast } from "sonner";
 import { addToFavorite, removeFromFavorite } from "@/interceptor/routes";
@@ -10,6 +10,7 @@ import { setFavorites } from "@/store/reducers/favoritesSlice";
 import { getUserData } from "@/events/getters";
 import { formatPrice } from "@/helpers/functionHelper";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 const ProductCard = ({
   id,
@@ -42,7 +43,8 @@ const ProductCard = ({
   const branch_id = branchData.id;
 
   const { t } = useTranslation();
-  
+  const router = useRouter();
+
   const handleFavChange = useCallback(
     async (value, id) => {
       if (!authentication) {
@@ -78,7 +80,7 @@ const ProductCard = ({
 
   return (
     <Card
-      className="relative group rounded-lg text-center overflow-hidden"
+      className="relative group rounded-lg text-center overflow-hidden bg-transparent"
       shadow="sm"
     >
       {/* Favorite Button */}
@@ -177,20 +179,13 @@ const ProductCard = ({
             )}
         </div>
 
-        <ProductModal
-          image={image}
-          title={title}
-          description={product?.short_description}
-          variants={product?.variants}
-          rating={product?.rating}
-          price={price}
-          discount={discount}
-          discountedPrice={discountedPrice}
-          categoryName={categoryName}
-          addOns={product?.product_add_ons}
-          onAddToBag={(details) => console.log(details)}
-          indicator={product?.indicator}
-        />
+        <Button
+          color="primary"
+          onPress={() => router.push(`/products/${product?.id}`)}
+          className="bg-primary-500 rounded px-2 py-2 font-semibold"
+        >
+          {t("add")}
+        </Button>
         <ProductRatingModal
             isOpen={showRatingModal}
             onClose={() => setShowRatingModal(false)}

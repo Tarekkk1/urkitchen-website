@@ -10,8 +10,8 @@ export const HeadTitle = ({ title, description, keywords, ogImage, noIndex = fal
   const router = useRouter();
   const settings = store.getState().settings.value?.web_settings?.[0] || {};
 
-  const metaDescription = description || settings.meta_description || "Home in every bite! Order your favourite food online from urkitchen — fast delivery in Egypt.";
-  const metaKeywords = keywords || settings.meta_keywords || "food delivery egypt, order food online, urkitchen, مطعم, توصيل طعام, القاهرة";
+  const metaDescription = description || settings.meta_description || "urkitchen (your kitchen) — اطلب أكل بيتي أصيل من شيفات منزليين في مصر. Order authentic homemade food from local home chefs. Fast delivery in Cairo, Alexandria & all Egypt.";
+  const metaKeywords = keywords || settings.meta_keywords || "ur kitchen, urkitchen, your kitchen egypt, homemade food egypt, home cooked food delivery cairo, home chef egypt, أكل بيتي, اكل بيتي, كل بيتي, أكل منزلي, طبخ بيتي, مطبخ بيتي, توصيل أكل بيتي, توصيل طعام منزلي, طعام منزلي مصر, food delivery egypt, authentic egyptian food, local home chefs";
   const pageTitle = getHeaderTitle(title);
   const canonical = `${SITE_URL}${router.asPath.split("?")[0]}`;
   const image = ogImage || OG_IMAGE;
@@ -48,6 +48,11 @@ export const HeadTitle = ({ title, description, keywords, ogImage, noIndex = fal
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={image} />
+
+      {/* Geo targeting */}
+      <meta name="geo.region" content="EG" />
+      <meta name="geo.placename" content="Cairo, Egypt" />
+      <meta httpEquiv="content-language" content="ar, en" />
     </Head>
   );
 };

@@ -6,10 +6,12 @@ import { addToFavorite, removeFromFavorite } from "@/interceptor/routes";
 import { getUserData } from "@/events/getters";
 import { toast } from "sonner";
 import { Avatar, Card, CardBody, CardFooter, Chip } from "@heroui/react";
+import { Button } from "@heroui/button";
 import { formatPrice } from "@/helpers/functionHelper";
-import ProductModal from "../Modals/ProductModal";
 import ProductRatingModal from "../Modals/ProductRatingModal";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const OfferCards = ({
   image,
@@ -27,11 +29,12 @@ const OfferCards = ({
   is_spicy,
   best_seller,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showRatingModal, setShowRatingModal] = useState(false);
+  const router = useRouter();
+  const { t } = useTranslation();
 
   const handleCardClick = () => {
-    setIsModalOpen(true);
+    router.push(`/products/${product?.id}`);
   };
 
   const userData = getUserData();
@@ -80,8 +83,9 @@ const OfferCards = ({
 
   return (
     <Card
-      className="relative w-full rounded overflow-hidden shadow-lg transition-transform transform duration-300 border 
-      dark:bg-gray-800 dark:border-gray-700"
+      className="relative w-full rounded overflow-hidden shadow-lg transition-transform transform duration-300
+      bg-transparent dark:bg-transparent"
+      style={{ backgroundColor: "transparent", border: "none" }}
     >
       <div
         onClick={() => handleCardClick()}
@@ -175,20 +179,15 @@ const OfferCards = ({
               </span>
             )}
           </div>
-          <ProductModal
-            image={image}
-            title={title}
-            description={product?.short_description}
-            variants={product?.variants}
-            rating={product?.rating}
-            price={price}
-            discount={discount}
-            discountedPrice={discountedPrice}
-            categoryName={categoryName}
-            addOns={product?.product_add_ons}
-            onAddToBag={(details) => console.log(details)}
-            indicator={product?.indicator}
-          />
+          <Button
+            color="primary"
+            onPress={(e) => {
+              router.push(`/products/${product?.id}`);
+            }}
+            className="bg-primary-500 rounded px-2 py-2 font-semibold"
+          >
+            {t("add")}
+          </Button>
           <ProductRatingModal
             isOpen={showRatingModal}
             onClose={() => setShowRatingModal(false)}

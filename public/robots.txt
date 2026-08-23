@@ -9,5 +9,12 @@ Disallow: /user/my-orders
 Disallow: /user/favorites
 Disallow: /user/profile
 Disallow: /user/refer
+Disallow: /user/UserLayout
+Disallow: /notifications
+
+# Allow image crawling for Google Image Search (food images = free traffic)
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /
 
 Sitemap: https://www.urkitchenegypt.com/sitemap.xml

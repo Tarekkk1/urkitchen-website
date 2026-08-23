@@ -428,6 +428,11 @@ export const placeOrder = async ({
   if (scheduled_to_time) formData.append("scheduled_to_time", scheduled_to_time);
   formData.append("is_same_day", is_same_day);
 
+  const fbc = document.cookie.split("; ").find((c) => c.startsWith("_fbc="))?.split("=")[1] || "";
+  const fbp = document.cookie.split("; ").find((c) => c.startsWith("_fbp="))?.split("=")[1] || "";
+  if (fbc) formData.append("fbc", fbc);
+  if (fbp) formData.append("fbp", fbp);
+
   let response = await api.post("/place_order", formData);
   return response.data;
 };

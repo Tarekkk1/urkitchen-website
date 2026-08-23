@@ -18,18 +18,6 @@ const PopularSection = ({ data, onFavoriteChange, isItemFavorited }) => {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const groupItems = (items, groupSize) => {
-    return items.reduce((acc, item, index) => {
-      if (index % groupSize === 0) {
-        acc.push([]);
-      }
-      acc[acc.length - 1].push(item);
-      return acc;
-    }, []);
-  };
-
-  const groupedData = groupItems(data, 6);
-
   const WaveBackground = () => {
     const generateWavePath = (yOffset, amplitude, frequency) => {
       let path = `M 0 ${yOffset} `;
@@ -106,35 +94,36 @@ const PopularSection = ({ data, onFavoriteChange, isItemFavorited }) => {
         }}
         effect="slide"
         pagination={true}
+        breakpoints={{
+          380: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+          1280: { slidesPerView: 6 },
+        }}
       >
-        {groupedData.map((slideItems, slideIndex) => (
-          <SwiperSlide key={slideIndex}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mx-auto max-w-[1800px] px-4 sm:px-6 md:px-8">
-              {slideItems.map((item, index) => (
-                <OfferCards
-                  key={index}
-                  image={item.image_sm}
-                  title={item.name}
-                  categoryName={item.category_name}
-                  rating={item.rating}
-                  price={item.variants[0]?.price}
-                  specialPrice={item.variants[0].special_price}
-                  discount={item.min_max_price.discount_in_percentage}
-                  discountedPrice={
-                    item.variants[0].special_price != 0
-                      ? item.variants[0].special_price
-                      : item.variants[0].price
-                  }
-                  description={item.description}
-                  product={item}
-                  onFavoriteChange={onFavoriteChange}
-                  isFavorite={isItemFavorited(item.id)}
-                  indicator={item.indicator}
-                  is_spicy={item.is_spicy}
-                  best_seller={item.best_seller}
-                />
-              ))}
-            </div>
+        {data.map((item, index) => (
+          <SwiperSlide key={index}>
+            <OfferCards
+              image={item.image_sm}
+              title={item.name}
+              categoryName={item.category_name}
+              rating={item.rating}
+              price={item.variants[0]?.price}
+              specialPrice={item.variants[0].special_price}
+              discount={item.min_max_price.discount_in_percentage}
+              discountedPrice={
+                item.variants[0].special_price != 0
+                  ? item.variants[0].special_price
+                  : item.variants[0].price
+              }
+              description={item.description}
+              product={item}
+              onFavoriteChange={onFavoriteChange}
+              isFavorite={isItemFavorited(item.id)}
+              indicator={item.indicator}
+              is_spicy={item.is_spicy}
+              best_seller={item.best_seller}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

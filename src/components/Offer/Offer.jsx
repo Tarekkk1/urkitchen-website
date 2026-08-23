@@ -36,7 +36,7 @@ const HomeOffer = () => {
         </div>
       ) : offers.length === 0 ? (
         <div className="text-center text-gray-500 py-6">No offers found</div>
-      ) : offers.length > 6 ? (
+      ) : (
         <Swiper
           slidesPerView={2}
           spaceBetween={10}
@@ -74,30 +74,6 @@ const HomeOffer = () => {
             );
           })}
         </Swiper>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {offers.map((item, index) => {
-            let link = "#";
-            if (item?.type === "categories" && item?.data?.length > 0) {
-              link = `/categories/${item?.data[0]?.slug}`;
-            }
-
-            return (
-              <Link href={link} key={index}>
-                <Card isHoverable isPressable className="shadow-none">
-                  <div className="p-2">
-                    <Image
-                      src={item.image}
-                      alt={`Offer image ${index + 1}`}
-                      loading="lazy"
-                      className="rounded-lg w-full h-52 object-cover"
-                    />
-                  </div>
-                </Card>
-              </Link>
-            );
-          })}
-        </div>
       )}
     </div>
   );

@@ -7,6 +7,17 @@ import { Progress } from "@heroui/react";
 import { Toaster } from "sonner";
 import { getBranchId } from "@/events/getters";
 import SideDrawer from "@/components/SideDrawer/SideDrawer";
+import AppDownloadBanner from "@/components/AppDownloadBanner/AppDownloadBanner";
+
+function captureFbclid() {
+  const params = new URLSearchParams(window.location.search);
+  const fbclid = params.get("fbclid");
+  if (!fbclid) return;
+  // Meta _fbc format: fb.1.<creationTime>.<fbclid>
+  const fbc = `fb.1.${Date.now()}.${fbclid}`;
+  const expires = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `_fbc=${fbc}; expires=${expires}; path=/; SameSite=Lax`;
+}
 
 const Header = dynamic(() => import("../components/Header/index"), {
   ssr: false,
@@ -31,6 +42,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     setMounted(true);
+    captureFbclid();
   }, []);
 
   useEffect(() => {
@@ -49,6 +61,8 @@ export default function RootLayout({ children }) {
 
   return (
     <div>
+      <AppDownloadBanner />
+
       {settings && (
         <Head>
           <link rel="icon" href={settings.favicon} type="image/*" sizes="any" />
